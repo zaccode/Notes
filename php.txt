@@ -1,0 +1,319 @@
+$row = mysqli_fetch_assoc($result);  // this is used to store associative array in the variable
+$row = mysqli_fetch_row($result);  //this function is make the fetched the data in index form
+$row = mysqli_fetch_array($result); //this will return the associative array and index 
+$row = mysqli_fetch_all($result); //it fetch all data in the table and return in multidimension array
+$row = mysqli_fetch_field($result); //it is used to fetch the information in the table
+mysqli_affected_rows($conn);    //this function return the number of rows in the table
+
+//Predefine words
+MYSQLI_ASSOC
+MYSQLI_NUM
+MYSQLI_BOTH
+
+$conn = mysqli_connect("localhost","root1","","test") or die("Connection Failed :".mysqli_connect_error());
+// this function describe the error in the connection
+
+$conn = mysqli_connect("localhost","root","","test") or die("Connection Failed :".mysqli_connect_errno());
+//this function is used to return the error number
+
+$result = mysqli_query($conn,$sql) or die("Query failed :".mysqli_error($conn));
+//this function is used to describe the errors in the SQL query 
+
+print_r(mysqli_error_list($conn)); //this function is used to return the error number
+		
+//is function Check the variable Value or Data Type in boolean form
+is_int			is_string
+is_integer		is_bool
+is_long			is_array
+is_float		is_countable
+is_double		is_null
+is_real			is_callable
+is_numeric		is_scalar
+
+var_dump() //this function is used to return boolen true or false
+
+//PHP Filter Validation:
+filter_var(var,filtername,options/flag)
+filtername = FILTER_VALIDATE_INT
+	FILTER_VALIDATE_FLOAT
+	FILTER_VALIDATE_BOOLEAN
+	FILTER_VALIDATE_EMAIL
+	FILTER_VALIDATE_URL
+	FILTER_VALIDATE_IP
+	FILTER_VALIDATE_MAC
+	FILTER_VALIDATE_REGEXP
+
+	//flag=FILTER_NULL_ON_FAILURE //this flag returns the null value if the failure is occured
+	//flag=FILTER_FLAG_PATH_REQUIRED //this flag "https://www.yahoobaba.net/test/page.php" is used to required the flag
+	//flag=FILTER_FLAG_QUERY_REQUIRED //Query required "https://www.yahoobaba.net/test/page.php?A=1&B=2"
+
+$option = array("options"=>array("min_range"=>20,"max_range"=>50));
+
+   if(filter_var($var,FILTER_VALIDATE_INT,$option)){
+    echo $var. "is an integer";
+}elseeturn null if they are fail
+
+$option = array("options"=>array("min_range"=>20,"max_range"=>50));
+
+   if(filter_var($var,FILTER_VALIDATE_INT,$option)){
+    echo $var. "is an integer";
+}
+
+
+//PHP Sanitize Fiter
+filter_var(var,filtername,flag)	//it gives the correct form
+filtername = FILTER_SANITIZE_EMAIL
+		FILTER_SANITIZE_URL
+		FILTER_SANITIZE_NUMBER_INT
+		FILTER_SANITIZE_NUMBER_FLOAT
+		FILTER_SANITIZE_MAGIC_QUOTES	//this is used to add slash in single double codes
+		FILTER_SANITIZE_STRING
+		FILTER_SANITIZE_ENCODED	//this is used to invert the spaces,commas,&,etc in encoded form
+		FILTER_SANITIZE_SPECIAL_CHARS	//As it is show the special characters 
+
+//flag = FILTER_FLAG_ALLOW_FRACTION //it gives the decimal point in the float function
+	FILTER_FLAG_ALLOW_THOUSAND //this flag is used to show the commas in the big number
+	FILTER_FLAG_ALLOW_SCIENTIFIC //this flag is used in scientific calculation
+	FILTER_FLAG_ENCODE_AMP //this flag is used to make the special character like & into the entity code form
+	FILTER_FLAG_STRIP_HIGH //this flag is used to remove the special character which is not avalable in the keyboard and this special character's ACCI value greater than 127
+	FILTER_FLAG_ENCODE_HIGH //this flag is used to invert the special characters in encoded form
+	
+	//FILTER VAR ARRAY
+	filter_var_array(data array,filter array);
+
+	//filter_var_array();
+   $arr = array(
+            "stname" => "Ram Kumar",
+            "stmark" => "90",
+            "stemail" => "ram kumar@example.com",
+
+   );
+
+   $filter = array(
+        "stname" => array(
+                    "filter" =>FILTER_SANITIZE_STRING,
+                    "flags " => FILTER_FLAG_STRIP_HIGH
+        ),
+        "stmark" =>array(
+                    "filter" => FILTER_VALIDATE_INT,
+                    "options" => array(
+                        "min_range" => 1,
+                        "max_range" => 100
+                    )
+        ),
+        "stemail" => FILTER_SANITIZE_EMAIL
+
+   );
+
+   echo "<pre>";
+   print_r (filter_var_array($arr,$filter));
+   echo "</pre>";
+
+//FILTER INPUT
+	filter_input(type,variable,filter,options);
+	type = INTPUT_GET		options = Validate Filters
+		INPUT_POST			  Sanitize Filters	
+		INTPUT_COOKIE
+		INPUT_SERVER
+		INPUT_ENV
+
+//File System Function
+readfile(filename)	//used to read the file
+unlink("filename")	//removing the server file
+file_exists(filename)	//the file exist is or not
+filesize()		//it is used to return the file size in bytes
+copy(oldfilename,newfilename)		//make clone the file
+filetype()		//returns the file type 
+rename("file.name","newname")		//changing the name of the file
+realpath("filename")	//it returns the file path
+mkdir("filename")		//used to make directory(folder)
+pathinfo("filename")	//returns the path information in associative array form
+rmdir("filename")				//used to remove directory(folder)
+dirname("filename")		//it returns the file's parent directory path(names)
+delete("filename")	//to remove the file
+basename("filename")		//it returns file basename eg:- readme.txt
+
+Advance function of File System
+fopen("filename","r") // r= read or w = write a+ = append modules use to open the module
+fread("filename",how many character)  //used to read the module
+fgets("filename")	//it only read 1st line in the file because the at first cursor is in position 1 ,this function works on cursor position
+ftell("filename")	//it tells the cursor position where is the cursor
+fseek("filename",change_position)	//it changes the cursor position
+fpassthru("filename")	//it reads the last position of the cursor from the end of the file sentence
+rewind("filename")	//this function change the cursor position at starting
+feof("filename")	//file end of file 
+file("filename")	//it returns the line by line in arrociative array form
+fgetc("filename")	//it reads only one character in the file depends on the cursor position
+fwrite("filename","whats data you wants to write")			
+fputs("filename")	//this function is same as fwrite
+fclose("filename")	//close the file
+ftruncate("filename",how many character you want ) 	//it takes the length and puts the characters and another character remove in the file
+
+File System 'is' Fnctions
+is_dir()	//it is used to check the folder or not
+is_file()	//this function is used to check file exist or not
+is_readable()	//can we read in this file or not 
+is_writable()	
+is_writeable()	//writeable or not can we write in this file or not 
+is_executable()	//check the file execute or not eg:- readme.exe  check the exefiles 
+
+//File Permission
+chmod(file_name,mode)	//to set the permission of the file
+fileperms("filename")	//to retuns the file permission code	
+
+//write in the file
+file_put_contents(filename,data,mode,context) //context parameter is the optional
+mode = FILE_APPEND or LOCK_EX	//append means merge the last string to the new string
+
+//Read from the File
+file_get_contents(filename,include_path,context,start,max_length)//include_path,context,start,max_length this is not nessesory
+		
+//File System Searching
+glob(pattern,flags)
+flags = GLOB_MARK	//it returns slash(/) after the folder eg.css/
+	GLOB_NOSORT	//
+	GLOB_NOCHECK	//file not exist time this flag is used
+	GLOB_BRACE	//it is used when we are searching two patterns in the glob veriable 
+	GLOB_ONLYDIR	//it returns only folders name	
+
+//Directory Functions
+getcwd()	//it returns the current directory cwd= current working directory
+chdir()		//it is used to change directory from the current directory
+scandir()	//scan the directory to see inert files in the folder
+
+opendir()
+readdir()
+closedir()
+
+//Regular Expression	regex101.com
+i = case insensitive
+^ = not include this 
+preg_match("/php/",string_name)	//if the string matches in the string then it returns true or false
+preg_match_all("/[wo]/",$string,$array) //it is used the searching single character in the string
+preg_match_all("/php|the/i",$string,$array) //two same strings in the string then it use to match the strings and array is form to locate the string with index and searching string place use 'i' this is case sensitives
+preg_match_all("/[^wo]/",$string,$array) //it is used to return those charcters array which is not include the 'w' or 'o' character
+preg_match_all("/[a-m]/",$string,$array) //it return the array which is include a to m  range characters
+
+//MetaCharacter
+\w 	//it is used to select the alphabetic character
+\W	//it is used to select the special character
+\d	//it is used to select the Numeric values
+\D	//it is used to select the Non-Numeric values
+\s 	//it is used to select the spaces
+\S 	//it is used to select the non-spaces
+\bname\b	//boundary selector is used to select the single character and string also
+\ph.	//it is used to select the single character, character after "." means the after character next character does'n know 
+/n	//next line
+
+//Quantifier
+* 	0 or More	//\d*word select all
++ 	1 or More	//\d+word select the numeric 
+? 	0 or One	// /Jan(uary)? before question mark value or word is optonal 
+{3}	Exact Number	// /oh{2}	h is repeated 2 times
+{3,5}	Range of Number(Minimum ,Maximum) // /oh{2,4}	h is repeated 2 to 4 times
+{3,}	Minimum Number to Infinite	//oh{2,}	h is repeated 2 to no. of times
+
+Greedy & Lazy Match
+*n	Greedy Match
++n	Greedy Match
+*?n	Lazy Match
++?n	Lazy Match
+
+Assertion
+?=n	positive Lokahead
+?!n	Negative Lookahead
+?<=	Positive Lookbehind
+?!=	Negative Lookbehind
+?<!	Negative Lookbehind
+
+//Function for Regular Expression
+preg_replace(pattern,replacement,string,limit)
+
+preg_split(pattern,string,limit,flags)
+
+preg_quote(string,delimiter)
+
+//How to Send Email
+mail(to,subject,message,header)
+
+//PHP Ajax with jQuery
+$.ajax({			//used to bring the data in the url page
+	url:"file.php".,
+	type:"POST",	//default value is set to GET
+	data:String/Array/Object,
+	dataType: 'JSON'	//at the time of api chose the 'JSON' 
+	success:function(data){
+
+	}
+});
+
+$.post(				//direct post method
+	"file.php",
+	String/Object
+	function(result){	//return data show in this function
+}
+);
+
+
+$.get(				//direct get method
+	"file.php",
+	String/Object
+	function(result){	//return data show in this function
+}
+);
+
+//JSON - JavaScript Object Literals Vs JavaScript Object
+JavaScript Object
+var person = {firstName: "yahoo",lastName: "Baba"};
+alert(person.firstName +"" person.lastName);
+
+JSON - JavaScript Object Notation
+var person = {"firstName": "yahoo","lastName": "Baba"};
+alert(person.firstName +"" person.lastName);
+
+jQuery ShortCut Function to read JSON Data
+
+$.getJSON(		//doesn't need curly braces
+	"JSON URL",
+	function(data){		//return data show in this function
+
+     }
+);
+
+//json_encode() Function
+//PHP Array is converted into JSON Object
+json_encode($arr);
+
+//json_decode() Function
+//JSON Object is converted into PHP Array
+json_decode(json_object,assoc);
+
+assoc= true(returns the associative array) and default value is false(returns PHP Object(simple array))
+
+$.each(data,function(key,values)){	//it is used to print the object- json data=values
+}
+
+JSON_PRETTY_PRINT //this is used to format the data
+
+//REST API
+	Representational State Transfer
+	  It Uses JSON,XML,text,user-defined
+
+	HTTP Methods
+	1.GET	=	Read Data
+	2.PUT	=	Update Data
+	3.POST	=	Insert or Create Data
+	4.DELETE=	Delete Data
+
+//Restful API with PHP headers
+	header('Content-Type: application/json');	//it is compulsory to use
+	header('Access-Control-Allow-Methods:PUT');
+	header('Access-Control-Allow-Origin:*');	//it is used for security purpose '*' means whichone access the the api
+	header('Access-Control-Allow-Headers:<heade-name>');	//it is also used for purpose we gives the header name and it allows the header for the user
+
+file_get_contents("php://input")	// "php://input" this format used to read all types of row data ,this is optional of $_POST,$GET	
+X-Requested-With	//it's a special header is used to know the whenever valuecomes only from ajax
+
+JSON.stringify() //to convert the data in the json string form ,javascript object into the json format
+serializeArray() //form data field is converted into the array
+  $(row).closest("tr").fadeout(); //to remove the row

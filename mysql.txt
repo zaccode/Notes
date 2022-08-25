@@ -1,0 +1,293 @@
+CREATE TABLE table_name(
+	schema
+);
+
+INSERT INTO file_name(schema)
+VALUES();
+
+SELECT __ AS __ FROM name;
+
+NOT IN();
+IN();
+
+WHERE ___BETWEEN ___ AND ___; 
+WHERE ___NOT BETWEEN ___ AND ___;
+
+WHERE __LIKE "%"; 
+WHERE __LIKE "_%";//to check the first character
+WHERE __LIKE "__%";//to check the secondcharacter
+WHERE __NOT LIKE "%"; 
+WHERE BINARY __ LIKE "_%" ; for the case sensitiveness
+
+WHERE __REGEXP '__';// to search the word
+WHERE __REGEXP '^_';// it is used for starting word
+WHERE __REGEXP '_$';// it is used for ending word
+WHERE name REGEXP '^ram|^gan|^kar'; //to find multiple name 
+WHERE name REGEXP '[ka]';//to check k and a separate in our table
+
+ORDER BY __;//to sort the data by passing the content_name
+ORDER BY name ASC;//to sorted the data by Ascending order
+ORDER BY name DESC;//to sorted the data by Ascending order
+
+WHERE city IS NULL;//to check the value is null 
+WHERE city IS NOT NULL;
+
+SYNTAX
+SELECT column1,column2,column3,....
+FROM table_name
+WHERE condition
+LIMIT offset,number;
+
+LIMIT _,_;
+
+Aggregate Function
+COUNT(column_name)
+MAX(column_name)
+MIN(column_name)
+SUM(column_name)
+AVG(column_name)
+
+Aggregate Function SYNTAX
+SELECT COUNT(column_name)
+FROM table_name
+WHERE condition;
+
+DISTINCT //no of different things
+
+UPDATE table_name		//this function update the data
+SET column1_name = value1,column2_name = value2....
+WHERE condition;
+WHERE id IN (2,3);
+
+COMMIT; //it is used to permanantly saved the data
+
+ROLLBACK; //it is revert the updated data and it is only work in INSERT ,UPDATE and DELETE operation
+
+DELETE FROM personal
+WHERE gender = 'F';
+
+//JOIN CLAUSE in mysql
+//INNER JOIN
+SELECT columns 
+FROM table1 
+INNER JOIN table2 
+ON table1.column_name = table2.column_name  //to join the primary key with foreign key of reference
+
+LEFT JOIN
+SELECT columns
+FROM table1
+LEFT JOIN table2
+ON table1.column_name = table2.column_name;	//it is same to the Inner join but differnce is Inner join skip the NULL values and it is not
+//left side of data is exist but right side of data is not exist 
+
+RIGHT JOIN
+SELECT columns
+FROM table1
+RIGHT JOIN table2
+ON table1.column_name = table2.column_name;	//at the time the data in not exist in foreign key and another thing is the data exist in primary key this data also show this join
+//right side of data is exist but left side of data is not exist
+
+SELECT columns
+FROM table1
+CROSS JOIN table2; 
+
+
+SELECT columns		//this is useful for join multiple table
+FROM table1
+INNER JOIN table2
+ON table1.column_name = table2.column_name
+INNER JOIN table3
+ON table1.column_name = table3.column_name;
+
+//GROUP BY Clause
+SELECT columns		//SELECT Clause means  what are you see
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+ORDER BY column_name(s);
+
+//HAVING Clause
+SELECT columns
+FROM table_name
+GROUP BY column_name(s)
+HAVING condition;	//HAVING clause is used to make condition on GROUP BY
+
+//SELECT WITH SubQuery Syntax
+SELECT colums
+FROM table1
+WHERE
+column = (SELECT columns FROM table2 WHERE condition);	//it is used to select a single thing
+
+SELECT colums
+FROM table1
+WHERE
+column IN (SELECT columns FROM table2 WHERE condition);	//it is used to select a mutiple thing
+
+
+//SubQuery with EXISTS and NOT EXISTS 
+SELECT columns
+FROM table1
+WHERE
+EXISTS (SELECT columns FROM table2 WHERE condition); //which parameter we pass in this, this is exist thenthe data will show
+
+SELECT columns
+FROM table1
+WHERE							//this is oppose the EXISTS 
+NOT EXISTS (SELECT columns FROM table2 WHERE condition); //which parameter we pass in this, this is not exist then the data will show
+
+UNION & UNION ALL Syntax	//UNION to ignore the duplicate words UNION ALL to does not ignore the duplicate words
+SELECT column1,column2 FROM table1
+UNION/UNION ALL
+SELECT column1,column2 FROM table2
+
+SELECT with IF Clause Syntax
+SELECT column1,column2,		//it is used to single statement
+IF(Condition,TRUE Result,FALSE Result) AS alias_name
+FROM table_name;
+
+//SELECT with CASE Clause Syntax
+SELECT/UPDATE column1,column2,	//this is used for multiple statement
+CASE
+	WHEN Condition1 THEN result1
+	WHEN Condition2 THEN result2
+	WHEN Condition3 THEN result3
+	WHEN Condition4 THEN result4
+	ELSE result alias_name
+	END AS alias_name
+	FROM table_name;
+
+//String function
+CHARACTER_LENGTH()
+CONCAT()
+CONCAT_WS()
+LTRIM()
+RTRIM()
+TRIM()
+POSITION()
+INSTR()
+SUBSTRING("YAHOOO BABA",2,6)//it returns the avalable string from the no
+SUBSTRING_INDEX("YAHOO BABA ","O",2) //it returns to the left side string
+LIGHT("YAHOO BABA",5)//it retruns to the left side string from index no 5
+RIGHT("YAHOO BABA",5)//it returns to the right side of string from index no 5
+LPAD("YAHOO BABA",20,"-")//it returns the padding string to the left side with no is 20
+RPAD("YAHOO BABA",20,"-")//it returns the padding string to the right side with no is 20
+SPACE(100)//Adding some spaces
+REVERSE("YAHOOO BABA")
+REPLACE("YAHOOOO BABA","BABA","WOW")//replace the BABA word by WOW
+STRCMP("Yahoo Baba","yahoo baba")//its use to compare the word and it case insensitive and it return 0  means match and 1 means not match
+FIELD("Baba","yahoo","baba","NAH")//it is used to find the 1st word in other words and returns the index
+FIND_IN_SET("Baba","yahoo,baba,NAH")//it is used to find in set
+FORMAT(255.345,2)//it is used to show after point value
+HEX("YAHOO BABA")//it is used to convert the parameter in HEX form
+
+
+DATE Function
+CURRENT_DATE()//it is used to return the current date
+SYSDATE()//it also return the current date
+NOW()//it is also used to return the current date and time
+DATE("2022-08-01 08:01:34")//it is used to return the date only
+MONTH("2022-08-01 08:01:34")//it is used to return the Month only
+YEAR("2022-08-01 08:01:34")//it is used to return Year only
+QUARTER("2019-10-15 09:35:22")//QUARTER means the group of 3 month and it is return the witch group is in date
+DAY("2022-08-16 08:01:34")//it returns the DAY in the given date
+DAYOFMONTH("2022-08-16 08:01:34")//it returns the month of the givent date
+DAYNAME("2022-08-1 08:01:34")//it returns the Day name in the given date
+DAYOFWEEK("2022-08-1 08:01:34")//it returns the date no in the week
+DAYOFYEAR("2022-08-1 08:01:34")//it returns the day in 365 days
+WEEK("2022-08-1 08:01:34")//it returns the week in the year
+WEEKDAY("2022-08-3 08:01:34")//it returns the day in the week
+YEARWEEK("2022-08-3 08:01:34")//show the week number in this year
+LAST_DAY("2022-08-3 08:01:34")//it returns the last date in the month
+EXTRACT(DAY FROM "2022-08-3 08:01:34")//it is used to extract the date data and used in day ,month,year etc keyword to find the data
+ADDDATE("2022-08-1",INTERVAL 10 DAY)//add the days,month,year,etc in this date
+SUBDATE("2022-08-1",INTERVAL 1 QUARTER)//subtract the days,month,year,etc in this date
+DATEDIFF("2022-08-1","2018-08-1")//this is used to show the diff in the two dates
+TO_DAYS("2018-08-1")//it is used to check the days from 1st year
+FROM_DAYS("737272")//it is a opposite function of the TO_DAYS
+PERIOD_ADD("737272","5")//it is used to add some period
+PERIOD_DIFF("737272","737262")//it is used to check the period data
+DATE_FORMAT("2022-08-01","%Y")//to format the data
+
+//TIME FUNCTIONS
+CURRENT_TIME()//it returns the current time
+CURRENT_TIMESTAMP()//it returns the current time and date
+LOCALTIME()//it returns the current time and date
+LOCALTIMESTAMP()//it returns the current time and date
+TIMEDIFF("13:15:20","11:15:20")//to check the difference between the two timing
+ADDTIME("13:15:20" ,"2:5.0003")//to add the time in the given time
+SUBTIME("13:15:20" ,"2:5.0003")//to subtract the time
+MAKETIME(15,16,20)//TO MAKE THE TIME
+TIMESTAMP("2015-06-20","15:16:20")//to combinintg the time
+
+//ALTER SYNTAX
+//Add Column
+ALTER TABLE table_name
+ADD column_name datatype;
+
+use AFTER keyword to change the location 
+
+//Modify Column
+ALTER TABLE table_name
+MODIFY column_name datatype;
+
+//Delete Column
+ALTER TABLE table_name
+DROP COLUMN column_name datatype;
+
+//Rename Column
+ALTER TABLE table_name
+CHANGE column_name New_name datatype;
+
+//Rename Table
+ALTER TABLE table_name
+RENAME new_table_name;
+
+//DROP Command is used to delete the table
+//TRUNCATE Command is used to delete the data in the table
+
+
+//VIEW it is used to make query shortcut 
+VIEW Syntax
+CREATE  OR REPLACE VIEW view_name
+AS
+SELECT columns
+FROM student
+INNER JOIN city
+ON student.city = city.cid;
+
+//to modify the data to use the ALTER VIEW
+ALTER VIEW studentdata 
+AS
+SELECT columns
+FROM student
+INNER JOIN city
+ON student.city = city.cid;
+INNER JOIN courses co
+ON s.course = co.crid;
+
+//Renaming the VIEWname
+RENAME TABLE view_Name
+TO new_Name
+
+//to delete the view
+DROP VIEW view_Name;
+
+//INDEX Syntax  
+CREATE INDEX index_name
+ON tale_name(column1,column2,....);
+
+
+
+
+
+
+
+
+
+//PHP & MYSQL Programming Steps:
+1) Connection
+   mysqli_connect(Server Name,User Name,Password,Database Name)
+2) Run SQL Query
+   mysqli_query(Connection Name,SQL Query)
+3) Close Connection
+   mysqli_close(Connection Name)
